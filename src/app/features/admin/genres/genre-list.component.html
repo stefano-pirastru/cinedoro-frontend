@@ -1,2 +1,76 @@
-<h2>Generi</h2>
-<p>Lista generi qui.</p>
+<div class="genres-page">
+  <div>
+    <h2 class="genres-title">Generi</h2>
+  </div>
+
+  <div class="genres-card">
+    <div>
+      <h5 class="genres-section-title">Crea genere</h5>
+
+      <div class="genre-form-row">
+        <input
+          class="genre-input"
+          type="text"
+          [ngModel]="newGenreName()"
+          (ngModelChange)="onGenreNameChange($event)"
+          name="newGenreName"
+          placeholder="Nome genere"
+        />
+
+        <button
+          class="genre-button genre-button-primary"
+          type="button"
+          (click)="createGenre()"
+          [disabled]="isSaving()"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="genres-feedback">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <p class="genres-loading">Caricamento generi...</p>
+  }
+
+  @if (!isLoading() && genres().length === 0) {
+    <p class="genres-empty">Nessun genere trovato.</p>
+  }
+
+  @if (genres().length > 0) {
+    <div class="genres-table-wrapper">
+      <table class="genres-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (genre of genres(); track genre.id) {
+            <tr>
+              <td class="genre-id">{{ genre.id }}</td>
+              <td class="genre-name">{{ genre.name }}</td>
+              <td class="genre-actions">
+                <button
+                  class="genre-button genre-button-danger"
+                  type="button"
+                  (click)="deleteGenre(genre.id)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

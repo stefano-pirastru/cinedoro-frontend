@@ -17,7 +17,7 @@ export class NavbarComponent {
   ) { }
   ngOnInit() {
     const role = localStorage.getItem('role');
-    this.isAdmin = role === 'admin';
+    this.isAdmin = role?.toLowerCase() === 'admin';
   }
 
   logout() {

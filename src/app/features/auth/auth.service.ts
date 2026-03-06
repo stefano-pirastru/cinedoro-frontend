@@ -20,6 +20,11 @@ export class AuthService {
       .pipe(
         tap(response => {
           localStorage.setItem('token', response.token);
+          // `?.` evita errori se `user` non esiste; `??` usa `response.role` solo se il valore a sinistra manca.
+          const role = response.user?.role ?? response.role;
+          if (role) {
+            localStorage.setItem('role', String(role).toLowerCase());
+          }
           this.isLoggedIn.set(true);   // aggiorna stato
         })
       );
@@ -31,6 +36,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.isLoggedIn.set(false);  // aggiorna stato
     this.router.navigate(['/login']);
   }

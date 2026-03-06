@@ -10,7 +10,7 @@ import { AuthService } from '../../../features/auth/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.css'],
 })
 export class Login {
   email = '';
@@ -20,8 +20,8 @@ export class Login {
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   onSubmit(): void {
     if (!this.email.trim() || !this.password.trim()) {
@@ -32,26 +32,28 @@ export class Login {
     this.isSubmitting = true;
     this.errorMsg = '';
 
-    this.authService.login(this.email, this.password)
+    this.authService
+      .login(this.email, this.password)
       .pipe(
         finalize(() => {
           this.isSubmitting = false;
-        })
+        }),
       )
       .subscribe({
         next: (response: any) => {
-          if (response.user?.role === 'admin') {
+          // Prova il ruolo dentro `user`, poi quello diretto nella response, poi quello salvato nel browser; se manca tutto usa stringa vuota.
+          const role = String(response.user?.role ?? response.role ?? localStorage.getItem('role') ?? '').toLowerCase();
+
+          if (role === 'admin') {
             void this.router.navigate(['/admin']);
             return;
           }
 
-          void this.router.navigate(['/']);
+          void this.router.navigate(['/films']);
         },
         error: () => {
           this.errorMsg = 'Email o password non validi';
-        }
+        },
       });
   }
-
-
 }
