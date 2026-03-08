@@ -44,6 +44,28 @@
   }
 
   @if (genres().length > 0) {
+    @if (genrePendingDelete(); as selectedGenre) {
+      <div class="genres-confirmation">
+        <p class="genres-confirmation-text">
+          Sei sicuro di voler rimuovere il genere "{{ selectedGenre.name }}"?
+        </p>
+
+        <div class="genres-confirmation-actions">
+          <button class="genre-button genre-button-danger" type="button" (click)="deleteGenre()">
+            Conferma
+          </button>
+
+          <button
+            class="genre-button genre-button-secondary"
+            type="button"
+            (click)="cancelDeleteGenre()"
+          >
+            Annulla
+          </button>
+        </div>
+      </div>
+    }
+
     <div class="genres-table-wrapper">
       <table class="genres-table">
         <thead>
@@ -62,7 +84,7 @@
                 <button
                   class="genre-button genre-button-danger"
                   type="button"
-                  (click)="deleteGenre(genre.id)"
+                  (click)="askDeleteGenre(genre)"
                 >
                   Delete
                 </button>

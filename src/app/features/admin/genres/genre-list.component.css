@@ -83,6 +83,11 @@
   background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
+.genre-button-secondary {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
 .genres-feedback {
   margin-bottom: 16px;
   padding: 12px 14px;
@@ -90,6 +95,29 @@
   border-radius: 10px;
   color: #991b1b;
   background-color: #fef2f2;
+}
+
+.genres-confirmation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  background: #fff7ed;
+}
+
+.genres-confirmation-text {
+  margin: 0;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+.genres-confirmation-actions {
+  display: flex;
+  gap: 10px;
 }
 
 .genres-loading,
@@ -168,6 +196,15 @@
 
   .genre-button {
     width: 100%;
+  }
+
+  .genres-confirmation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .genres-confirmation-actions {
+    flex-direction: column;
   }
 
   .genres-table th,

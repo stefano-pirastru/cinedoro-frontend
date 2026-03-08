@@ -24,6 +24,7 @@ export class GenreListComponent implements OnInit {
   errorMessage = signal('');
   isLoading = signal(false);
   isSaving = signal(false);
+  genrePendingDelete = signal<Genre | null>(null);
 
   constructor(private genreService: GenreService) {}
 
@@ -96,14 +97,29 @@ export class GenreListComponent implements OnInit {
       });
   }
 
-  deleteGenre(id: number): void {
+  askDeleteGenre(genre: Genre): void {
+    this.genrePendingDelete.set(genre);
+  }
+
+  cancelDeleteGenre(): void {
+    this.genrePendingDelete.set(null);
+  }
+
+  deleteGenre(): void {
+    const genre = this.genrePendingDelete();
+
+    if (!genre) {
+      return;
+    }
+
     this.errorMessage.set('');
 
-    this.genreService.deleteGenre(id).subscribe({
+    this.genreService.deleteGenre(genre.id).subscribe({
       next: () => {
         // UPDATE:
         // trasformo la lista corrente rimuovendo il genere cancellato.
-        this.genres.update((genres) => genres.filter((genre) => genre.id !== id));
+        this.genres.update((genres) => genres.filter((item) => item.id !== genre.id));
+        this.genrePendingDelete.set(null);
       },
       error: () => {
         this.errorMessage.set("Errore durante l'eliminazione del genere.");
