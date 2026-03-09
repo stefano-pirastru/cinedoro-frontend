@@ -1,0 +1,81 @@
+<div class="admin-container">
+    <div class="header">
+        <h1 class="title">Crea Nuovo Film</h1>
+    </div>
+
+    <form (ngSubmit)="createFilm()" class="admin-form">
+
+        <div class="form-group">
+            <label>Titolo *</label>
+            <input type="text" [(ngModel)]="filmForm.title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label>Descrizione *</label>
+            <textarea rows="4" [(ngModel)]="filmForm.description" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Durata (minuti) *</label>
+            <input type="number" [(ngModel)]="filmForm.durationMinutes" name="durationMinutes" required>
+        </div>
+
+        <div class="form-group">
+            <label>Data di uscita *</label>
+            <input type="date" [(ngModel)]="filmForm.releaseDate" name="releaseDate" required>
+        </div>
+
+        <div class="form-group">
+            <label>Classificazione Età</label>
+            <input type="number" [(ngModel)]="filmForm.ageRating" name="ageRating">
+        </div>
+
+        <div class="form-group">
+            <label>Regista</label>
+            <select [(ngModel)]="filmForm.directorId" name="director">
+                <option [ngValue]="null">Seleziona Regista</option>
+                <option *ngFor="let d of directors" [ngValue]="d.id">
+                    {{ d.firstName }} {{ d.lastName }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Attori</label>
+            <select multiple [(ngModel)]="filmForm.actorIds" name="actors">
+                <option *ngFor="let a of actors" [ngValue]="a.id">
+                    {{ a.firstName }} {{ a.lastName }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Generi</label>
+            <select multiple [(ngModel)]="filmForm.genreIds" name="genres">
+                <option *ngFor="let g of genres" [ngValue]="g.id">
+                    {{ g.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Carica Immagine</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+
+        <div *ngIf="imagePreview" class="form-group">
+            <label>Anteprima:</label>
+            <img [src]="imagePreview" class="img-preview">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn" [disabled]="loading">
+                {{ loading ? 'Creazione...' : 'Crea Film' }}
+            </button>
+            <button type="button" class="btn btn-cancel" routerLink="/admin/films">
+                Annulla
+            </button>
+        </div>
+
+    </form>
+</div>

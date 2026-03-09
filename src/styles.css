@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/* Full app background */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+
+  /* Background gradient + subtle pattern */
+  background:
+    linear-gradient(180deg, rgba(46, 46, 46, 0.95) 0%, rgba(47, 23, 23, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1600&q=80')
+      no-repeat center center fixed;
+
+  background-size: cover;
+  color: #f8f8f8;
+}

@@ -13,18 +13,31 @@ export class ScreeningService {
     constructor(private http: HttpClient) { }
 
     getAllScreenings(): Observable<Screening[]> {
-        return this.http.get<Screening[]>(this.apiUrl)
+        return this.http.get<any[]>(this.apiUrl)
     }
 
     getScreeningsByFilm(filmId: number): Observable<Screening[]> {
-        return this.http.get<Screening[]>(`${this.apiUrl}/film/${filmId}`)
+        return this.http.get<any[]>(`${this.apiUrl}/film/${filmId}`)
     }
 
     getScreeningsByDate(date: string): Observable<Screening[]> {
-        return this.http.get<Screening[]>(`${this.apiUrl}/date?date=${date}`)
+        return this.http.get<any[]>(`${this.apiUrl}/date?date=${date}`)
     }
     getScreeningById(id: number): Observable<Screening> {
-        return this.http.get<Screening>(`${this.apiUrl}/${id}`);
+        return this.http.get<any>(`${this.apiUrl}/${id}`);
+    }
+    // Create a new screening
+    createScreening(screening: Screening): Observable<Screening> {
+        return this.http.post<any>(this.apiUrl, screening)
     }
 
+    // Update an existing screening
+    updateScreening(id: number, screening: Screening): Observable<Screening> {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, screening)
+    }
+
+    // Delete a screening by ID
+    deleteScreening(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`)
+    }
 }

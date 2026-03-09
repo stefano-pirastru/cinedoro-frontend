@@ -41,10 +41,7 @@ export class Login {
       )
       .subscribe({
         next: (response: any) => {
-          // Prova il ruolo dentro `user`, poi quello diretto nella response, poi quello salvato nel browser; se manca tutto usa stringa vuota.
-          const role = String(response.user?.role ?? response.role ?? localStorage.getItem('role') ?? '').toLowerCase();
-
-          if (role === 'admin') {
+          if (response.role === 'admin') {
             void this.router.navigate(['/admin']);
             return;
           }

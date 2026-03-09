@@ -1,0 +1,80 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="header">
+        <h1 class="title">Gestisci Sale</h1>
+    </div>
+
+    <!-- Create Button (only if not editing or creating) -->
+    <div class="text-center" *ngIf="!showCreateForm() && !editingHall()">
+        <button class="btn" (click)="showCreateHallForm()">Crea Nuova Sala</button>
+    </div>
+
+    <!-- Create Hall Form -->
+    <div *ngIf="showCreateForm()" class="admin-form">
+        <h3>Crea Nuova Sala</h3>
+        <form (ngSubmit)="createHall()">
+            <div class="form-group">
+                <label for="newName">Nome Sala:</label>
+                <input id="newName" [(ngModel)]="newHall().name" name="newName" required />
+                <div *ngIf="newHall().name === ''" class="error-msg">Il nome è obbligatorio</div>
+            </div>
+
+            <div class="form-group">
+                <label for="newCapacity">Capacità:</label>
+                <input id="newCapacity" type="number" [(ngModel)]="newHall().capacity" name="newCapacity" required />
+                <div *ngIf="newHall().capacity <= 0" class="error-msg">La capacità deve essere maggiore di 0</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Crea Sala</button>
+                <button type="button" class="btn btn-cancel" (click)="cancelCreate()">Annulla</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Edit Hall Form -->
+    <div *ngIf="editingHall()" class="admin-form">
+        <h3>Modifica Sala</h3>
+        <form (ngSubmit)="updateHall()">
+            <div class="form-group">
+                <label for="editName">Nome Sala:</label>
+                <input id="editName" [(ngModel)]="editingHall()!.name" name="editName" required />
+                <div *ngIf="editingHall()!.name === ''" class="error-msg">Il nome è obbligatorio</div>
+            </div>
+
+            <div class="form-group">
+                <label for="editCapacity">Capacità:</label>
+                <input id="editCapacity" type="number" [(ngModel)]="editingHall()!.capacity" name="editCapacity"
+                    required />
+                <div *ngIf="editingHall()!.capacity <= 0" class="error-msg">La capacità deve essere maggiore di 0</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Aggiorna Sala</button>
+                <button type="button" class="btn btn-cancel" (click)="cancelEdit()">Annulla</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Existing Halls -->
+    <div *ngIf="halls().length > 0">
+        <h3 class="sub-title">Sale Esistenti</h3>
+        <div class="card-grid">
+            <div *ngFor="let hall of halls()" class="admin-card">
+                <div class="card-content">
+                    <h4>{{ hall.name }}</h4>
+                    <p>Capacità: {{ hall.capacity }}</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-edit" (click)="startEditing(hall)">Modifica</button>
+                    <button class="btn btn-delete" (click)="deleteHall(hall.id)">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Halls Message -->
+    <div *ngIf="halls().length === 0 && !showCreateForm() && !editingHall()" class="no-data">
+        <p>Nessuna sala trovata. Creane una per iniziare!</p>
+    </div>
+</div>

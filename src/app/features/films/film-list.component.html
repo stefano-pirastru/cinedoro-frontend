@@ -1,40 +1,43 @@
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-
-        <h2>Movies</h2>
-
+<div class="wizard-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="search-bar">
+            <input type="text" placeholder="Cerca film..." [(ngModel)]="searchQuery" />
+            <button (click)="searchFilms()">Cerca</button>
+        </div>
     </div>
 
-    <div class="row">
-
-        <div class="col-md-4" *ngFor="let film of films$ | async">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <h5 class="card-title">{{ film.title }}</h5>
-
-                    <p class="card-text">{{ film.description }}</p>
-
-                    <p>
-                        Duration: {{ film.durationMinutes }} min
-                    </p>
-
-                    <div class="d-flex gap-2">
-
-                        <button class="btn btn-primary" [routerLink]="['/screenings/film', film.id]">
-                            View Screenings
-                        </button>
-
-                    </div>
-
-                </div>
-
+    <!-- Films Grid -->
+    <section class="films-grid">
+        <div class="film-card" *ngFor="let film of films$ | async">
+            <!-- Poster -->
+            <div class="poster">
+                <img *ngIf="film.imageUrl; else noImage"
+                    [src]="'http://localhost:8080/api/film/images/' + film.imageUrl" />
+                <ng-template #noImage>
+                    <div class="poster-placeholder">🎬</div>
+                </ng-template>
+                <div class="age-badge">{{ film.ageRating }}+</div>
             </div>
 
+            <!-- Content -->
+            <div class="film-content">
+                <h2 class="film-title">{{ film.title }}</h2>
+                <!-- <p class="film-description">{{ film.description }}</p>
+
+                <div class="film-meta">
+                    <span>⏱ {{ film.durationMinutes }} min</span>
+                    <span>📅 {{ film.releaseDate | date:'yyyy' }}</span>
+                </div> -->
+
+                <div class="genres">
+                    <span class="genre-badge" *ngFor="let g of film.genres">{{ g.name }}</span>
+                </div>
+
+                <button class="primary-btn" [routerLink]="['/screenings/film', film.id]">
+                    Vedi tutte le proiezioni
+                </button>
+            </div>
         </div>
-
-    </div>
-
+    </section>
 </div>

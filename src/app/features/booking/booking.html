@@ -1,32 +1,188 @@
-<div *ngIf="bookingData$ | async as data">
-    <h2>{{ data.film.title }} - {{ data.screening.screeningDate }} at {{ data.screening.screeningTime?.substring(0,5) }}
-    </h2>
+<div *ngIf="bookingData$ | async as data" class="booking-page">
 
-    <!-- Seats -->
-    <div *ngFor="let row of getSeatsByRow(data.seats) | keyvalue" class="seat-row">
-        <span>Row {{ row.key }}</span>
-        <button *ngFor="let seat of row.value" (click)="toggleSeat(seat.id)"
-            [class.selected]="selectedSeats.includes(seat.id)">
-            {{ seat.seatNumber }}
-        </button>
+    <!-- Back Button -->
+
+    <button class="back-btn" (click)="goBack()"> ← Indietro</button>
+
+    <div class=" layout">
+
+        <!-- LEFT SIDE -->
+        <div class="left-section">
+
+            <!-- SEAT SELECTION -->
+            <div class="card">
+
+                <h2 class="title">
+                    {{ data.film.title }}
+                </h2>
+
+                <p class="subtitle">
+                    {{ data.screening.screeningDate }} at {{ data.screening.screeningTime }}
+                </p>
+
+                <!-- SCREEN -->
+                <div class="screen-wrapper">
+                    <div class="screen"></div>
+                    <p class="screen-text">SCHERMO</p>
+                </div>
+
+                <!-- SEATS -->
+                <div class="seat-grid">
+
+                    <div *ngFor="let row of getSeatsByRow(data.seats) | keyvalue" class="seat-row">
+
+                        <span class="row-label">Fila {{ row.key }}</span>
+
+                        <div class="seats">
+
+                            <button *ngFor="let seat of row.value" (click)="toggleSeat(seat.id)"
+                                [disabled]="isSeatOccupied(seat.id)" [class.selected]="selectedSeats.includes(seat.id)"
+                                [class.occupied]="isSeatOccupied(seat.id)" class="seat">
+
+                                {{ seat.seatNumber }}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- LEGEND -->
+                <div class="legend">
+
+                    <div class="legend-item">
+                        <span class="seat-demo available"></span>
+                        Disponibile
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="seat-demo selected"></span>
+                        Selezionato
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="seat-demo occupied"></span>
+                        Occupato
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICES -->
+            <div class="card">
+
+                <h3 class="section-title">Servizi Extra</h3>
+
+                <div *ngFor="let service of data.services" class="service-item">
+
+                    <div class="service-info">
+                        <p class="service-name">{{ service.name }}</p>
+                        <p class="service-desc">{{ service.description }}</p>
+                        <p class="service-price">{{ service.price | currency }}</p>
+                    </div>
+
+                    <div class="service-controls">
+
+                        <button (click)="updateServiceQuantity(service.id,(selectedServices[service.id] || 0) - 1)">
+                            -
+                        </button>
+
+                        <span>{{ selectedServices[service.id] || 0 }}</span>
+
+                        <button (click)="updateServiceQuantity(service.id,(selectedServices[service.id] || 0) + 1)">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE SUMMARY -->
+        <div class="summary-card">
+
+            <h3>Riepilogo Prenotazione</h3>
+
+            <div class="summary-section">
+
+                <p class="label">Film</p>
+                <p>{{ data.film.title }}</p>
+
+            </div>
+
+            <div class="summary-section">
+
+                <p class="label">Data e Ora</p>
+                <p>
+                    {{ data.screening.screeningDate }}
+                    {{ data.screening.screeningTime }}
+                </p>
+
+            </div>
+
+            <div class="summary-section">
+
+                <p class="label">Posti ({{ selectedSeats.length }})</p>
+
+                <div *ngIf="selectedSeats.length > 0" class="seat-badges">
+
+                    <span *ngFor="let seatId of selectedSeats" class="badge">
+
+                        Posto {{ seatId }}
+
+                    </span>
+
+                </div>
+
+                <p *ngIf="selectedSeats.length === 0" class="muted">
+                    Nessun posto selezionato
+                </p>
+
+            </div>
+
+
+            <div class="summary-section">
+
+                <p>
+                    Biglietti ({{ selectedSeats.length }})
+                </p>
+
+                <p>
+                    {{ selectedSeats.length * data.screening.basePrice | currency }}
+                </p>
+
+            </div>
+
+            <div class="summary-total">
+
+                <span>Totale</span>
+                <span>{{ calculateTotal(data) | currency }}</span>
+
+            </div>
+
+
+            <button class="confirm-btn" (click)="handleBooking(data)"
+                [disabled]="selectedSeats.length === 0 || bookingInProgress">
+
+                {{ bookingInProgress ? 'In elaborazione...' : 'Conferma Prenotazione' }}
+
+            </button>
+
+        </div>
+
     </div>
 
-    <!-- Services -->
-    <div *ngFor="let service of data.services" class="service-item">
-        <span>{{ service.name }} - {{ service.price | currency }}</span>
-        <button (click)="updateServiceQuantity(service.id, (selectedServices[service.id] || 0) - 1)">-</button>
-        <span>{{ selectedServices[service.id] || 0 }}</span>
-        <button (click)="updateServiceQuantity(service.id, (selectedServices[service.id] || 0) + 1)">+</button>
-    </div>
-
-    <!-- Booking Summary -->
-    <div class="booking-summary">
-        <p>Tickets: {{ selectedSeats.length }}</p>
-        <p>Services: {{ selectedServices | json }}</p>
-        <p>Total: {{ calculateTotal(data) | currency }}</p>
-        <button (click)="handleBooking(data)" [disabled]="bookingInProgress">Confirm Booking</button>
-    </div>
 </div>
-<div *ngIf="!(bookingData$ | async)">
-    Loading...
+
+
+<div *ngIf="!(bookingData$ | async)" class="loading">
+    Caricamento informazioni sulla prenotazione...
 </div>

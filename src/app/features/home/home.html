@@ -1,0 +1,72 @@
+<div class="wizard-container">
+
+    <!-- Header -->
+    <!-- <header class="header">
+        <h1 class="title">Cinedoro Cinema</h1>
+    </header> -->
+    <!-- <header class="header">
+        <a routerLink="/" class="logo-header">
+            <img src="./logo.png" alt="Cinedoro Cinema" />
+        </a>
+    </header> -->
+    <!-- Navigation Buttons -->
+    <div class="header-buttons">
+        <div class="top-actions">
+            <button routerLink="/films">Esplora Film</button>
+            <button routerLink="/my-bookings">Le mie prenotazioni</button>
+        </div>
+    </div>
+
+    <!-- Films Grid -->
+    <section class="films-grid">
+
+        <div class="film-card" *ngFor="let film of films$ | async">
+
+            <!-- Poster -->
+            <div class="poster">
+
+                <img *ngIf="film.imageUrl; else noImage"
+                    [src]="'http://localhost:8080/api/film/images/' + film.imageUrl" [alt]="film.title" />
+
+                <ng-template #noImage>
+                    <div class="poster-placeholder">🎬</div>
+                </ng-template>
+
+                <div class="age-badge">
+                    {{ film.ageRating }}+
+                </div>
+
+            </div>
+
+            <!-- Content -->
+            <div class="film-content">
+
+                <h2 class="film-title">
+                    {{ film.title }}
+                </h2>
+
+                <!-- <p class="film-description">
+                    {{ film.description }}
+                </p>
+
+                <div class="film-meta">
+                    <span>⏱ {{ film.durationMinutes }} min</span>
+                    <span>📅 {{ film.releaseDate | date:'yyyy' }}</span>
+                </div>
+
+                <div class="genres">
+                    <span class="genre-badge" *ngFor="let g of film.genres || []">
+                        {{ g.name }}
+                    </span>
+                </div> -->
+
+                <!-- Button -->
+                <button class="primary-btn" [routerLink]="['/screenings/film', film.id]">
+                    Vedi tutte le proiezioni
+                </button>
+
+            </div>
+        </div>
+
+    </section>
+</div>

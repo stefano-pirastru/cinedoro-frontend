@@ -5,32 +5,32 @@
     <p>{{ film.description }}</p>
 
     <p>
-        <strong>Duration:</strong> {{ film.durationMinutes }} minutes
+        <strong>Durata:</strong> {{ film.durationMinutes }} minuti
     </p>
 
     <p>
-        <strong>Release Date:</strong> {{ film.releaseDate }}
+        <strong>Data di uscita:</strong> {{ film.releaseDate }}
     </p>
 
     <p>
-        <strong>Age Rating:</strong> {{ film.ageRating }}+
+        <strong>Classificazione età:</strong> {{ film.ageRating }}+
     </p>
 
     <p>
-        <strong>Director:</strong>
+        <strong>Regista:</strong>
         {{ film.director.firstName }} {{ film.director.lastName }}
     </p>
 
     <hr>
 
-    <h3>Genres</h3>
+    <h3>Generi</h3>
     <span *ngFor="let genre of film.genres">
         {{ genre.name }}
     </span>
 
     <hr>
 
-    <h3>Actors</h3>
+    <h3>Attori</h3>
     <ul>
         <li *ngFor="let actor of film.actors">
             {{ actor.firstName }} {{ actor.lastName }} ({{ actor.nationality }})
@@ -39,7 +39,7 @@
 
     <hr>
 
-    <h3>Screenings</h3>
+    <h3>Proiezioni</h3>
 
     <div *ngFor="let date of (groupScreeningsByDate(film.screenings) | keyvalue)">
 

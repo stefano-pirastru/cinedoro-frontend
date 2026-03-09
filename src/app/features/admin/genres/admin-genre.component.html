@@ -1,0 +1,40 @@
+<div class="admin-container">
+    <div class="header">
+        <h1 class="title">Gestisci Generi</h1>
+    </div>
+
+    <!-- Create Genre Form -->
+    <div class="admin-form">
+        <h3>Aggiungi Genere</h3>
+        <form (ngSubmit)="createGenre()">
+            <div class="form-group">
+                <label>Nome Genere</label>
+                <input type="text" placeholder="Nome genere" [(ngModel)]="newGenre().name" name="genreName" required />
+            </div>
+            <div class="form-actions">
+                <button class="btn" type="submit">Aggiungi Genere</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Existing Genres Table -->
+    <h3 class="sub-title">Generi Esistenti</h3>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome Genere</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let genre of genres()">
+                <td>{{ genre.id }}</td>
+                <td>{{ genre.name }}</td>
+                <td>
+                    <button class="btn btn-delete" (click)="deleteGenre(genre.id)">Elimina</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

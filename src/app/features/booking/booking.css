@@ -1,0 +1,270 @@
+/* Booking Page Container */
+.booking-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #f8f8f8;
+}
+
+/* Back Button */
+.back-btn {
+  margin-bottom: 20px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #ffd700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: #ffec70;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* Cards */
+.card {
+  background: rgba(31, 31, 31, 0.85);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Titles */
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.subtitle {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+/* Screen */
+.screen-wrapper {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.screen {
+  height: 8px;
+  background: linear-gradient(to bottom, #555, #888);
+  border-radius: 20px;
+}
+
+.screen-text {
+  font-size: 12px;
+  color: #ffd700;
+  margin-top: 5px;
+}
+
+/* Seats */
+.seat-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.row-label {
+  width: 70px;
+  font-weight: bold;
+}
+
+.seats {
+  display: flex;
+  gap: 8px;
+}
+
+.seat {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 2px solid #555;
+  background: #2b2b2b;
+  color: #f8f8f8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.seat:hover {
+  transform: scale(1.1);
+  background: #444;
+}
+
+.seat.selected {
+  background: #2196f3;
+  border-color: #2196f3;
+}
+
+.seat.occupied {
+  background: #e53935;
+  border-color: #b71c1c;
+  cursor: not-allowed;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f8f8f8;
+}
+
+.seat-demo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid #555;
+}
+
+.seat-demo.available {
+  background: #2b2b2b;
+}
+
+.seat-demo.selected {
+  background: #2196f3;
+}
+
+.seat-demo.occupied {
+  background: #e53935;
+}
+
+/* Services */
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.service-name {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.service-desc {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.service-price {
+  font-size: 14px;
+  color: #f8f8f8;
+}
+
+.service-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.service-controls button {
+  width: 28px;
+  height: 28px;
+  background: #555;
+  border: none;
+  color: #f8f8f8;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.service-controls button:hover {
+  background: #777;
+}
+
+/* Summary Card */
+.summary-card {
+  background: rgba(31, 31, 31, 0.85);
+  border-radius: 12px;
+  padding: 25px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.summary-section {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffd700;
+}
+
+.seat-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.badge {
+  background: #444;
+  color: #f8f8f8;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.muted {
+  color: #999;
+}
+
+/* Summary Total */
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #ffd700;
+}
+
+/* Confirm Button */
+.confirm-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: #2196f3;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-btn:hover:not(:disabled) {
+  background: #0d47a1;
+}
+
+.confirm-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #ffd700;
+}

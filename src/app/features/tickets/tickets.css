@@ -1,0 +1,222 @@
+/* Page background */
+.ticket-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #f0f0f0;
+}
+
+/* Header */
+.ticket-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ticket-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffd700; /* Cinematic gold */
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 4px #ff7f50; /* subtle glow */
+}
+
+.ticket-success {
+  font-size: 18px;
+  color: #ccc;
+}
+
+/* Loading & Error */
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.error p {
+  color: #f87171; /* Soft red */
+  background: #4b1f1f; /* Darker red background */
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #f87171;
+}
+
+/* Ticket details sections */
+.ticket-details {
+  display: grid;
+  gap: 30px;
+}
+
+/* Booking reference, tickets, summary, info */
+.booking-reference,
+.tickets-section,
+.booking-summary,
+.important-info {
+  background: #1f1f1f; /* Dark card */
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); /* glowing shadow */
+}
+
+/* Section headers */
+.booking-reference h2,
+.tickets-section h2,
+.booking-summary h2,
+.important-info h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffd700; /* Gold highlight */
+  margin-bottom: 20px;
+  border-bottom: 2px solid #444;
+  padding-bottom: 10px;
+}
+
+/* Reference code */
+.reference-code {
+  background: #333;
+  color: #ffd700;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 6px #ffd700;
+}
+
+.booking-reference p {
+  text-align: center;
+  color: #ccc;
+}
+
+/* Tickets grid */
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.ticket-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2); /* golden glow effect */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ticket-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+}
+
+.ticket-header-mini {
+  background: #333;
+  padding: 8px 12px;
+  font-weight: 500;
+  color: #ffd700;
+}
+
+.ticket-body {
+  padding: 12px;
+}
+
+.ticket-body p {
+  margin: 0 0 8px;
+  color: #ccc;
+}
+
+/* Summary details */
+.summary-details p {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-details .total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #444;
+}
+
+/* Ticket Actions */
+.ticket-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.ticket-actions button {
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+}
+
+.ticket-actions .btn-print {
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.ticket-actions .btn-print:hover {
+  background-color: #1e40af;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.6);
+}
+
+.ticket-actions .btn-download {
+  background-color: #16a34a;
+  color: white;
+}
+
+.ticket-actions .btn-download:hover {
+  background-color: #15803d;
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.6);
+}
+
+.ticket-actions .btn-home {
+  background-color: #7f1d1d;
+  color: white;
+}
+
+.ticket-actions .btn-home:hover {
+  background-color: #ff4500;
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.6);
+}
+
+/* Important Info */
+.important-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.important-info li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.important-info li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1;
+}

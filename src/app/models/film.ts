@@ -5,6 +5,7 @@ import { Screening } from "./screening"
 
 export interface Film {
     id: number
+    imageUrl?: string
     title: string
     durationMinutes: number
     description: string

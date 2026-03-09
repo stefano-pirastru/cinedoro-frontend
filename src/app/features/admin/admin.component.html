@@ -1,7 +1,15 @@
-<h2>Admin Panel</h2>
+<div class="admin-layout">
+    <main class="admin-content">
+        <router-outlet></router-outlet>
+    </main>
 
-<button routerLink="/admin/films">Gestisci Film</button>
-<button routerLink="/admin/genres">Gestisci Generi</button>
-<button routerLink="/admin/actors">Gestisci Attori</button>
-<button routerLink="/admin/directors">Gestisci Registi</button>
-<button routerLink="/admin/cinema-services">Gestisci Cinema-Services</button>
+    <nav class="admin-bottom-bar">
+        <a routerLink="/admin/films" routerLinkActive="active">Gestisci Film</a>
+        <a routerLink="/admin/hall" routerLinkActive="active">Gestisci Sale</a>
+        <a routerLink="/admin/genres" routerLinkActive="active">Gestisci Generi</a>
+        <a routerLink="/admin/actors" routerLinkActive="active">Gestisci Attori</a>
+        <a routerLink="/admin/directors" routerLinkActive="active">Gestisci Registi</a>
+        <a routerLink="/admin/cinema-service" routerLinkActive="active">Gestisci Servizi</a>
+        <a routerLink="/admin/screenings" routerLinkActive="active">Gestisci Proiezioni</a>
+    </nav>
+</div>

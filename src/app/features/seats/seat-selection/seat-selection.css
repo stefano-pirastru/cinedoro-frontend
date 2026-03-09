@@ -1,0 +1,123 @@
+/* Container */
+.container {
+  text-align: center;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(31, 31, 31, 0.85); /* slightly transparent dark container */
+  border-radius: 12px;
+  color: #f8f8f8;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Screen */
+.screen {
+  background: #333;
+  color: #ffd700; /* golden letters */
+  padding: 12px 0;
+  margin: 20px auto;
+  width: 60%;
+  font-weight: bold;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Seats Container */
+.seat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Seat Row */
+.seat-row {
+  display: flex;
+  margin: 6px 0;
+}
+
+/* Seat */
+.seat {
+  width: 38px;
+  height: 38px;
+  margin: 5px;
+  background: #4caf50; /* available seat */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.seat:hover {
+  transform: translateY(-2px);
+}
+
+/* Selected Seat */
+.seat.selected {
+  background: #2196f3; /* bright blue for selected */
+}
+
+/* Occupied Seat */
+.seat.occupied {
+  background: #e53935; /* red for occupied */
+  cursor: not-allowed;
+}
+
+/* Summary */
+.summary {
+  margin-top: 25px;
+  text-align: left;
+  background: rgba(47, 23, 23, 0.6);
+  padding: 18px;
+  border-radius: 10px;
+  color: #f8f8f8;
+}
+
+.summary h3 {
+  margin-bottom: 12px;
+  color: #ffd700; /* golden header for services */
+}
+
+/* Service Inputs */
+.services .service {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.services input[type='number'] {
+  width: 60px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #222;
+  color: #f8f8f8;
+}
+
+/* Buttons */
+button {
+  padding: 10px 22px;
+  background: #1976d2;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #0d47a1;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}

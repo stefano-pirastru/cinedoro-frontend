@@ -1,15 +1,82 @@
-<h2>Screenings</h2>
+<div *ngIf="film$ | async as film; else loading" class="film-container">
 
-<div *ngFor="let screening of screenings$ | async" class="screening-card">
+    <ng-container *ngIf="film; else notFound">
 
-    <p>Date: {{screening.screeningDate}}</p>
+        <!-- Back Button -->
+        <button class="back-button" (click)="goBack()">← Torna indietro</button>
 
-    <p>Time: {{screening.screeningTime}}</p>
+        <!-- Main Layout -->
+        <div class="grid-container">
 
-    <p>Price: {{screening.basePrice}} €</p>
+            <!-- Poster -->
+            <div class="poster">
+                <img [src]="film.imageUrl" [alt]="film.title" class="poster-image" />
+                <div class="poster-overlay"></div>
+            </div>
 
-    <button [routerLink]="['/booking', screening.id]">
-        Book
-    </button>
+            <!-- Details -->
+            <div class="details">
+
+                <h1 class="film-title">{{ film.title }}</h1>
+
+                <!-- Genres -->
+                <div class="genres">
+                    <span *ngFor="let g of film.genres || []" class="badge">{{ g.name }}</span>
+                    <span class="badge age">{{ film.ageRating }}+</span>
+                </div>
+
+                <!-- Meta -->
+                <div class="meta">
+                    <span>⏱ {{ film.durationMinutes }} min</span>
+                    <span>📅 {{ film.releaseDate | date:'yyyy' }}</span>
+                    <span *ngIf="film.director">🎬 {{ film.director.firstName }} {{ film.director.lastName }}</span>
+                </div>
+
+                <!-- Description -->
+                <p class="description">{{ film.description }}</p>
+
+                <!-- Cast -->
+                <div class="section">
+                    <h2>Cast</h2>
+                    <div class="cast-grid">
+                        <div *ngFor="let actor of film.actors" class="card">
+                            <p class="actor-name">{{ actor.firstName }} {{ actor.lastName }}</p>
+                            <small>{{ actor.nationality }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenings -->
+                <div class="section">
+                    <h2>Proiezioni</h2>
+                    <div *ngIf="!film.screenings || film.screenings.length === 0">Nessuna proiezione disponibile.</div>
+                    <div *ngFor="let group of getGroupedScreenings(film.screenings) | keyvalue" class="screening-date">
+                        <h3>{{ formatDate(group.key) }}</h3>
+                        <div class="screening-buttons">
+                            <a *ngFor="let s of group.value" [routerLink]="['/booking', s.id]" class="screening-btn">
+                                {{ formatTime(s.screeningTime) }} • €{{ s.basePrice }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
 
 </div>
+
+<!-- Loading -->
+<ng-template #loading>
+    <div class="loading-container">
+        <div class="loading-spinner">🎬</div>
+        <p>Caricamento dettagli...</p>
+    </div>
+</ng-template>
+
+<!-- Not Found -->
+<ng-template #notFound>
+    <div class="not-found">Film non trovato.</div>
+</ng-template>

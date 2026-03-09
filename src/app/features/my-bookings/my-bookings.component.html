@@ -1,0 +1,18 @@
+<div *ngFor="let b of bookings$ | async" class="booking-card">
+    <h3>{{ b.filmTitle }}</h3>
+
+    <p>
+        {{ b.screeningDate }} - {{ b.screeningTime }}
+    </p>
+
+    <p>
+        Prezzo totale: €{{ b?.totalPrice }}
+    </p>
+
+    <p>
+        Posti:
+        <span *ngFor="let s of b.seats">
+            Fila {{ s.row }} Posto {{ s.number }}
+        </span>
+    </p>
+</div>

@@ -1,1 +1,68 @@
-<p>tickets works!</p>
+<div class="ticket-container">
+    <div class="ticket-header">
+        <h1>🎬 Prenotazione Confermata!</h1>
+        <p class="ticket-success">I tuoi biglietti sono stati prenotati con successo.</p>
+    </div>
+
+    <div *ngIf="loading()" class="loading">
+        <p>Caricamento informazioni biglietto...</p>
+    </div>
+
+    <div *ngIf="errorMessage() && !loading()" class="error">
+        <p>{{ errorMessage() }}</p>
+    </div>
+
+    <div *ngIf="!loading() && !errorMessage() && ticketData()" class="ticket-details">
+
+        <!-- Booking Reference -->
+        <div class="booking-reference">
+            <h2>Riferimento Prenotazione</h2>
+            <div class="reference-code">{{ bookingId() }}</div>
+            <p>Si prega di mostrare questo ID all'ingresso del cinema</p>
+        </div>
+
+        <!-- Tickets -->
+        <div class="tickets-section">
+            <h2>I tuoi Biglietti</h2>
+            <div class="tickets-grid">
+                <div *ngFor="let ticket of ticketList()" class="ticket-card">
+                    <div class="ticket-header-mini">
+                        <span class="ticket-id">Biglietto #{{ ticket.id }}</span>
+                    </div>
+                    <div class="ticket-body">
+                        <p><strong>Posto:</strong> {{ ticket.seatId }}</p>
+                        <p><strong>Prezzo:</strong> {{ ticket.price | currency }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="booking-summary">
+            <h2>Riepilogo Prenotazione</h2>
+            <div class="summary-details">
+                <p><strong>Numero di Biglietti:</strong> {{ ticketList().length }}</p>
+                <p><strong>Posti Selezionati:</strong> {{ seatNumbers() }}</p>
+                <p class="total"><strong>Importo Totale:</strong> {{ totalPrice() | currency }}</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="ticket-actions">
+            <button class="btn-print" (click)="printTickets()">🖨️ Stampa Biglietti</button>
+            <button class="btn-download" (click)="downloadTickets()">⬇️ Scarica PDF</button>
+            <button class="btn-home" (click)="goHome()">🏠 Vai alla Home</button>
+        </div>
+
+        <!-- Important Info -->
+        <div class="important-info">
+            <h3>Informazioni Importanti</h3>
+            <ul>
+                <li>Si prega di arrivare 15 minuti prima dell'inizio della proiezione</li>
+                <li>Mostra questa conferma di prenotazione alla biglietteria</li>
+                <li>Conserva il riferimento della prenotazione</li>
+                <li>Le cancellazioni devono essere effettuate 24 ore prima della proiezione</li>
+            </ul>
+        </div>
+    </div>
+</div>

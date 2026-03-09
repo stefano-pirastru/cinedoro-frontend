@@ -1,0 +1,129 @@
+<div class="admin-container">
+    <div class="header">
+        <h1 class="title">Gestisci Proiezioni</h1>
+    </div>
+
+    <div *ngIf="loading()" class="loading">Caricamento proiezioni...</div>
+
+    <div *ngIf="!loading() && !hasScreenings()" class="no-data">
+        <p>Nessuna proiezione trovata. Creane una per iniziare!</p>
+    </div>
+
+    <div class="text-center">
+        <button *ngIf="!showCreateForm() && !showEditForm()" (click)="showCreateScreeningForm()" class="btn">
+            Crea Nuova Proiezione
+        </button>
+    </div>
+
+    <div *ngIf="showCreateForm()" class="admin-form">
+        <h3>Crea Nuova Proiezione</h3>
+        <form (ngSubmit)="createScreening()">
+            <div class="form-group">
+                <label for="newFilm">Film:</label>
+                <select id="newFilm" [(ngModel)]="newScreening().filmId" name="newFilm" required>
+                    <option [ngValue]="0" disabled>Seleziona un film</option>
+                    <option *ngFor="let film of films()" [ngValue]="film.id">{{ film.title }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="newHall">Sala:</label>
+                <select id="newHall" [(ngModel)]="newScreening().hallId" name="newHall" required>
+                    <option [ngValue]="0" disabled>Seleziona una sala</option>
+                    <option *ngFor="let hall of halls()" [ngValue]="hall.id">
+                        {{ hall.name }} (Capacità: {{ hall.capacity }})
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="newScreeningDate">Data Proiezione:</label>
+                <input id="newScreeningDate" type="date" [(ngModel)]="newScreening().screeningDate"
+                    name="newScreeningDate" required />
+            </div>
+
+            <div class="form-group">
+                <label for="newScreeningTime">Ora Proiezione:</label>
+                <input id="newScreeningTime" type="time" [(ngModel)]="newScreening().screeningTime"
+                    name="newScreeningTime" required />
+            </div>
+
+            <div class="form-group">
+                <label for="newBasePrice">Prezzo Base:</label>
+                <input id="newBasePrice" type="number" [(ngModel)]="newScreening().basePrice" name="newBasePrice"
+                    required />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Crea Proiezione</button>
+                <button type="button" (click)="cancelCreate()" class="btn btn-cancel">Annulla</button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="!loading() && hasScreenings()">
+        <h3 class="sub-title">Proiezioni Esistenti</h3>
+        <div class="card-grid">
+            <div *ngFor="let screening of screenings()" class="admin-card">
+                <div class="card-content">
+                    <h4>ID Proiezione: {{ screening.id }}</h4>
+                    <p><strong>Film:</strong> {{ films().find(f => f.id === screening.filmId)?.title }}</p>
+                    <p><strong>Sala:</strong> {{ halls().find(h => h.id === screening.hallId)?.name }}</p>
+                    <p><strong>Data:</strong> {{ screening.screeningDate }}</p>
+                    <p><strong>Ora:</strong> {{ screening.screeningTime }}</p>
+                    <p><strong>Prezzo:</strong> {{ screening.basePrice | currency }}</p>
+                </div>
+                <div class="card-actions">
+                    <button (click)="showEditScreeningForm(screening)" class="btn btn-edit">Modifica</button>
+                    <button (click)="deleteScreening(screening.id)" class="btn btn-delete">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showEditForm() && editScreening()" class="admin-form">
+        <h3>Modifica Proiezione</h3>
+        <form (ngSubmit)="updateScreening()">
+            <div class="form-group">
+                <label for="editFilm">Film:</label>
+                <select id="editFilm" [(ngModel)]="editScreening().filmId" name="editFilm" required>
+                    <option [ngValue]="0" disabled>Seleziona un film</option>
+                    <option *ngFor="let film of films()" [ngValue]="film.id">{{ film.title }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="editHall">Sala:</label>
+                <select id="editHall" [(ngModel)]="editScreening().hallId" name="editHall" required>
+                    <option [ngValue]="0" disabled>Seleziona una sala</option>
+                    <option *ngFor="let hall of halls()" [ngValue]="hall.id">
+                        {{ hall.name }} (Capacità: {{ hall.capacity }})
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="editScreeningDate">Data Proiezione:</label>
+                <input id="editScreeningDate" type="date" [(ngModel)]="editScreening().screeningDate"
+                    name="editScreeningDate" required />
+            </div>
+
+            <div class="form-group">
+                <label for="editScreeningTime">Ora Proiezione:</label>
+                <input id="editScreeningTime" type="time" [(ngModel)]="editScreening().screeningTime"
+                    name="editScreeningTime" required />
+            </div>
+
+            <div class="form-group">
+                <label for="editBasePrice">Prezzo Base:</label>
+                <input id="editBasePrice" type="number" [(ngModel)]="editScreening().basePrice" name="editBasePrice"
+                    required />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Aggiorna Proiezione</button>
+                <button type="button" (click)="cancelEdit()" class="btn btn-cancel">Annulla</button>
+            </div>
+        </form>
+    </div>
+</div>

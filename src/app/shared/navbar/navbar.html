@@ -1,27 +1,36 @@
 <nav class="navbar">
     <div class="navbar-container">
 
-        <div class="logo">
-            🎬 CineDoro
-        </div>
+        <a routerLink="/" class="logo">
+            <img src="./logo.png">
+        </a>
 
         <ul class="nav-links">
-            <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-            <li><a routerLink="/proiezioni" routerLinkActive="active">Proiezioni</a></li>
-            <li><a routerLink="/servizi" routerLinkActive="active">Servizi</a></li>
-            <li><a routerLink="/profile" routerLinkActive="active">Profilo</a></li>
-            <li><a routerLink="/carrello" routerLinkActive="active">Carrello</a></li>
-            <li *ngIf="isAdmin"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+            <li>
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            </li>
+            <li>
+                <a routerLink="/films" routerLinkActive="active">Film</a>
+            </li>
+            <li>
+                <a routerLink="/my-bookings" routerLinkActive="active">Le mie prenotazioni</a>
+            </li>
+            <li *ngIf="isAdmin()">
+                <a routerLink="/admin" routerLinkActive="active">Amministrazione</a>
+            </li>
         </ul>
 
         <div class="nav-right">
-            @if (!authService.isLoggedIn()) {
-            <a routerLink="/login">Login</a>
-            <a routerLink="/register">Registrati</a>
-            } @else {
-            <a routerLink="/profile">Profilo</a>
-            <button type="button" (click)="logout()">Logout</button>
-            }
+            <ng-container *ngIf="!authService.isLoggedIn(); else loggedIn">
+                <a routerLink="/login" class="btn btn-secondary">Accesso</a>
+                <a routerLink="/register" class="btn">Registrati</a>
+            </ng-container>
+
+            <ng-template #loggedIn>
+                <span class="user-name">Benvenuto, {{ userName() }}</span>
+                <button (click)="logout()" class="btn btn-logout">Esci</button>
+            </ng-template>
         </div>
+
     </div>
 </nav>

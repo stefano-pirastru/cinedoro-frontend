@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../features/auth/auth.service';
@@ -8,17 +8,14 @@ import { AuthService } from '../../features/auth/auth.service';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrls: ['./navbar.css'],
 })
 export class NavbarComponent {
-  isAdmin = false;
-  constructor(
-    public authService: AuthService,
-  ) { }
-  ngOnInit() {
-    const role = localStorage.getItem('role');
-    this.isAdmin = role?.toLowerCase() === 'admin';
-  }
+  // Computed signals
+  isAdmin = computed(() => this.authService.getUserRole() === 'admin');
+  userName = computed(() => this.authService.getUserName());
+
+  constructor(public authService: AuthService) { }
 
   logout() {
     this.authService.logout();

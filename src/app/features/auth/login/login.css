@@ -1,45 +1,91 @@
-.card { 
-  max-width: 420px; 
-  margin: 24px auto; 
-  padding: 18px; 
-  border: 1px solid #333; 
-  border-radius: 12px; 
+/* Inspired by home.css */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background: #faf7f2;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-.row { 
-  display: grid; 
-  gap: 6px; 
-  margin: 10px 0; 
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
-input { 
-  padding: 10px; 
-  border-radius: 10px; 
-  border: 1px solid #444; 
-  background: #111; 
-  color: #fff; 
+.card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #7f1d1d;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-button { 
-  width: 100%; 
-  padding: 10px; 
-  border-radius: 10px; 
-  border: 1px solid #444; 
-  background: #222; 
-  color: #fff; 
-  cursor: pointer; 
+.form-group {
+  margin-bottom: 20px;
 }
 
-.error { 
-  color: #ff6b6b; 
-  margin: 8px 0; 
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
 }
 
-.muted { 
-  margin-top: 10px; 
-  opacity: .85; 
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
-small { 
-  opacity: .8; 
+.error {
+  color: #dc2626;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background: #7f1d1d;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #450a0a;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.muted {
+  text-align: center;
+  margin-top: 20px;
+  color: #6b7280;
+}
+
+.muted a {
+  color: #7f1d1d;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.muted a:hover {
+  text-decoration: underline;
 }

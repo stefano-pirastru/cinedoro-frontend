@@ -1,51 +1,40 @@
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-
-        <h2>Movies</h2>
-        <button class="btn btn-success" routerLink="/admin/films/create">
-            Create Movie
-        </button>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-4" *ngFor="let film of films$ | async">
-
-            <div class="card mb-3">
-
-                <div class="card-body">
-
-                    <h5 class="card-title">{{ film.title }}</h5>
-
-                    <p class="card-text">{{ film.description }}</p>
-
-                    <p>
-                        Duration: {{ film.durationMinutes }} min
-                    </p>
-
-                    <div class="d-flex gap-2">
-
-                        <button class="btn btn-primary" [routerLink]="['/screenings/film', film.id]">
-                            View Screenings
-                        </button>
-
-                        <button class="btn btn-warning" [routerLink]="['/admin/films/edit', film.id]">
-                            Edit
-                        </button>
-
-                        <button class="btn btn-danger" (click)="deleteFilm(film.id!)">
-                            Delete
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+<div class="admin-container">
+    <div class="header">
+        <h1 class="title">Gestisci Film</h1>
+        <div class="actions">
+            <input type="text" class="search-input" placeholder="Cerca film..." [(ngModel)]="searchQuery">
+            <button class="btn" (click)="searchFilms()">Cerca</button>
+            <button class="btn" routerLink="/admin/films/create">Crea Film</button>
         </div>
-
     </div>
 
+    <!-- Film Cards -->
+    <div class="films-grid">
+        <div class="film-card" *ngFor="let film of films$ | async">
+            <div class="poster">
+                <img *ngIf="film.imageUrl" [src]="'http://localhost:8080/api/film/images/' + film.imageUrl"
+                    alt="{{ film.title }}">
+                <div *ngIf="!film.imageUrl" class="poster-placeholder">
+                    <span>{{ film.title.charAt(0) }}</span>
+                </div>
+            </div>
+            <div class="film-content">
+                <h3 class="film-title">{{ film.title }}</h3>
+                <p class="film-description">{{ film.description }}</p>
+                <div class="film-meta">
+                    <span>Durata: {{ film.durationMinutes }} min</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" [routerLink]="['/screenings/film', film.id]">Proiezioni</button>
+                    <button class="btn btn-edit" [routerLink]="['/admin/films/edit', film.id]">Modifica</button>
+                    <button class="btn btn-delete" (click)="deleteFilm(film.id!)">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No films found -->
+    <div *ngIf="(films$ | async)?.length === 0" class="no-data">
+        Nessun film trovato.
+    </div>
 </div>

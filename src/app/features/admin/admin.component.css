@@ -1,0 +1,42 @@
+.admin-content {
+  padding: 20px;
+  /* Add padding to prevent content from being hidden behind the bottom bar */
+  padding-bottom: 100px;
+  background: #faf7f2;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.admin-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  align-items: center;
+  padding: 15px 20px;
+  background: #7f1d1d;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  gap: 10px;
+}
+
+.admin-bottom-bar a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-bottom-bar a:hover {
+  background: #450a0a;
+}
+
+.admin-bottom-bar a.active {
+  background-color: #d4af37;
+  font-weight: 500;
+}

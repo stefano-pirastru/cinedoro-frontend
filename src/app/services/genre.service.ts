@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateGenreRequest, Genre } from '../models/genre';
+
+export interface Genre {
+    id?: number;
+    name: string;
+}
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root'
 })
 export class GenreService {
-  private apiUrl = 'http://localhost:8080/api/genres';
 
-  constructor(private http: HttpClient) {}
+    private apiUrl = 'http://localhost:8080/api/genres';
 
-  getAllGenres(): Observable<Genre[]> {
-    return this.http.get<Genre[]>(this.apiUrl);
-  }
+    constructor(private http: HttpClient) { }
 
-  getGenreById(id: number): Observable<Genre> {
-    return this.http.get<Genre>(`${this.apiUrl}/${id}`);
-  }
+    getAllGenres(): Observable<Genre[]> {
+        return this.http.get<Genre[]>(this.apiUrl);
+    }
 
-  createGenre(genre: CreateGenreRequest): Observable<Genre> {
-    return this.http.post<Genre>(this.apiUrl, genre);
-  }
+    getGenreById(id: number): Observable<Genre> {
+        return this.http.get<Genre>(`${this.apiUrl}/${id}`);
+    }
 
-  deleteGenre(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+    createGenre(genre: Genre): Observable<Genre> {
+        return this.http.post<Genre>(this.apiUrl, genre);
+    }
+
+    deleteGenre(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
 }

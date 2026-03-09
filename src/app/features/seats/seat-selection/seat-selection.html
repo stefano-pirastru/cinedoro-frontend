@@ -1,0 +1,35 @@
+<div class="container">
+
+    <h2>Select Your Seats</h2>
+
+    <div class="screen">SCREEN</div>
+
+    <div class="seat-container">
+        <div *ngFor="let row of seatMatrix" class="seat-row">
+            <div *ngFor="let seat of row" class="seat" [class.occupied]="isOccupied(seat.id)"
+                [class.selected]="isSelected(seat.id)" (click)="selectSeat(seat)">
+                {{ seat.seatNumber }}
+            </div>
+        </div>
+    </div>
+
+    <div class="summary">
+        <p>Selected Seats: {{ selectedSeats.length }}</p>
+        <p>Total Price: €{{ selectedSeats.length * 12 + getSelectedServicesTotal() }}</p>
+
+        <div class="services">
+            <h3>Select Cinema Services</h3>
+            <div *ngFor="let service of cinemaServices" class="service">
+                <label>
+                    <input type="number" [(ngModel)]="selectedServices[service.id]" min="0" />
+                    {{ service.name }} - €{{ service.price }} each
+                </label>
+            </div>
+        </div>
+
+        <button (click)="bookSeats()" [disabled]="selectedSeats.length === 0">
+            Book Seats
+        </button>
+    </div>
+
+</div>
