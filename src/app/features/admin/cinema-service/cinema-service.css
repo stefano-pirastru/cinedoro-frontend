@@ -87,7 +87,9 @@
   font-weight: 600;
   color: #7f1d1d;
 }
-
+.admin-table td {
+  color: #333;
+}
 /* Forms */
 .admin-form {
   margin-top: 30px;

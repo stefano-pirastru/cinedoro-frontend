@@ -71,6 +71,9 @@
   margin-top: 20px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
+.admin-table td {
+  color: #333;
+}
 
 .admin-table th,
 .admin-table td {

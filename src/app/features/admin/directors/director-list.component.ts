@@ -16,7 +16,7 @@ import { FormsModule } from "@angular/forms";
 
 export class DirectorListComponent implements OnInit {
     //per contenere tutti i registi
-    directors = signal<Director[]>([]);
+    directors = signal<any[]>([]);
 
     newDirector: Director = {
         firstName: '',

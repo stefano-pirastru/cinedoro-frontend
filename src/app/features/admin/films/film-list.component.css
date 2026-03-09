@@ -1,11 +1,16 @@
-/* Inspired by home.css */
+/* Page */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: #f8f9fb;
+  color: #1a1a1a;
+}
 
 /* Container */
 .admin-container {
   max-width: 1200px;
   margin: auto;
   padding: 40px 20px;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
 /* Header */
@@ -17,50 +22,61 @@
 .title {
   font-size: 36px;
   font-weight: 700;
-  color: #7f1d1d;
-  letter-spacing: 1px;
   margin-bottom: 20px;
 }
 
+/* Header Actions */
 .actions {
   display: flex;
   justify-content: center;
   gap: 10px;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
 .search-input {
-  padding: 10px;
+  padding: 10px 12px;
+  width: 250px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  min-width: 300px;
+  background: white;
+  color: #111;
+}
+
+.search-input::placeholder {
+  color: #777;
 }
 
 /* Buttons */
 .btn {
-  margin: 5px;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  background: #7f1d1d;
+  background: #d4af37;
   color: white;
   transition: all 0.2s ease;
-  text-align: center;
 }
 
 .btn:hover {
-  background: #450a0a;
+  background: #b8962e;
   transform: translateY(-1px);
 }
 
+.btn-secondary {
+  background: #4b5563;
+}
+
+.btn-secondary:hover {
+  background: #374151;
+}
+
 .btn-edit {
-  background: #d4af37;
+  background: #2563eb;
 }
 
 .btn-edit:hover {
-  background: #b89a30;
+  background: #1d4ed8;
 }
 
 .btn-delete {
@@ -71,20 +87,12 @@
   background: #b91c1c;
 }
 
-.btn-secondary {
-  background: #6b7280;
-}
-
-.btn-secondary:hover {
-  background: #4b5563;
-}
-
-/* Film Grid */
+/* Films Grid */
 .films-grid {
-  margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr); /* always 3 per row */
+  gap: 24px;
+  margin-top: 20px;
 }
 
 /* Film Card */
@@ -94,21 +102,22 @@
   overflow: hidden;
   border: 1px solid #eee;
   transition: all 0.25s ease;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
 }
 
 .film-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
 }
 
 /* Poster */
 .poster {
   position: relative;
   width: 100%;
-  height: fit-content;
-  overflow: hidden;
-  background: #eee;
+  aspect-ratio: 2 / 3;
+  background: #f0f0f0;
 }
 
 .poster img {
@@ -124,51 +133,54 @@
   justify-content: center;
   font-size: 60px;
   background: #eee;
-  color: #ccc;
+  color: #d4af37;
 }
 
-/* Content */
+/* Film Content */
 .film-content {
   padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+/* Title */
 .film-title {
-  margin: 0 0 6px;
+  margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #7f1d1d;
+  color: #111;
+  text-align: center;
 }
 
+/* Description */
 .film-description {
   font-size: 14px;
-  color: #555;
-  margin-bottom: 12px;
+  color: #444;
   line-height: 1.4;
-  height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
 }
 
+/* Meta */
 .film-meta {
   font-size: 13px;
-  color: #777;
-  margin-bottom: 15px;
+  color: #666;
+  text-align: center;
 }
 
+/* Card Buttons */
 .card-actions {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
   margin-top: auto;
 }
 
-.card-actions .btn {
-  flex: 1;
-}
-
+/* No Data */
 .no-data {
   text-align: center;
-  padding: 20px;
-  font-size: 16px;
-  color: #555;
-  margin-top: 20px;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #777;
 }

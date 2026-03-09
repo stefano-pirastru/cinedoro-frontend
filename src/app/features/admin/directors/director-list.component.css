@@ -123,7 +123,9 @@
 .form-group {
   margin-bottom: 15px;
 }
-
+.admin-table td {
+  color: #333;
+}
 .form-group label {
   display: block;
   margin-bottom: 5px;
